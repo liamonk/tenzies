@@ -6,6 +6,7 @@ export default function App() {
   const [numberOfDice, setNumberOfDice] = React.useState(10);
   const [dice, setDiceNumbers] = React.useState(allNewDice);
   const [tenzies, setTenzies] = React.useState(false);
+  const [rolls, setRolls] = React.useState(0);
 
   React.useEffect(() => {
     let allHeld = dice.every((die) => die.isHeld);
@@ -44,16 +45,21 @@ export default function App() {
     return newDice;
   }
 
-  function resetDice() {
+  function newGame() {
     setDiceNumbers(allNewDice());
+    setRolls(0);
+    setTenzies(false);
   }
 
   function rollDice() {
-    setDiceNumbers((oldNumbers) =>
-      oldNumbers.map((die) => {
-        return die.isHeld ? die : generateNewDie();
-      })
-    );
+    if (!tenzies) {
+      setRolls((oldRolls) => oldRolls + 1);
+      setDiceNumbers((oldNumbers) =>
+        oldNumbers.map((die) => {
+          return die.isHeld ? die : generateNewDie();
+        })
+      );
+    }
   }
 
   const diceElements = dice.map((die) => {
@@ -70,21 +76,28 @@ export default function App() {
   return (
     <main>
       <h1>N-zies!</h1>
-      <p className="instructions">
-        Roll the dice until they are all the same. Click on a dice to hold it.
-      </p>
       <p className="instuctions">Select the number of dice to play with!</p>
-
       <input
         type="number"
         className="dice-quantity"
         value={numberOfDice}
         onChange={handleDiceNumChange}
       ></input>
-      <button className="reset-button" onClick={resetDice}>
-        Reset
+      <button className="reset-button" onClick={newGame}>
+        New Game
       </button>
+      <div>
+        {tenzies ? (
+          <p>Congratulations - You Won in {rolls} turns!</p>
+        ) : (
+          <p>
+            Roll the dice until they are all the same. Click on a dice to hold
+            it.
+          </p>
+        )}
+      </div>
       <div className="dice-container">{diceElements}</div>
+      <p>Score: {rolls}</p>
       <button className="roll-button" onClick={rollDice}>
         Roll!
       </button>
