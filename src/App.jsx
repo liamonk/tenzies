@@ -2,7 +2,6 @@ import React from "react";
 import Dice from "./components/Dice";
 import { nanoid } from "nanoid";
 import { useWindowSize } from "@uidotdev/usehooks";
-
 import Confetti from "react-confetti";
 
 export default function App() {
@@ -10,9 +9,12 @@ export default function App() {
   const [dice, setDiceNumbers] = React.useState(allNewDice);
   const [tenzies, setTenzies] = React.useState(false);
   const [rolls, setRolls] = React.useState(0);
-  const [highScore, setHighScore] =
-    React.useState(100000000000000000000000000000000000);
-  const [highScoreLevel, setHighScoreLevel] = React.useState(0);
+  const [highScore, setHighScore] = React.useState(
+    JSON.parse(localStorage.getItem("highScore")) || 1000000000
+  );
+  const [highScoreLevel, setHighScoreLevel] = React.useState(
+    JSON.parse(localStorage.getItem("highScoreLevel")) || 0
+  );
 
   React.useEffect(() => {
     let allHeld = dice.every((die) => die.isHeld);
@@ -22,6 +24,11 @@ export default function App() {
       setTenzies(true);
     }
   }, [dice]);
+
+  React.useEffect(() => {
+    localStorage.setItem("highScore", JSON.stringify(highScore));
+    localStorage.setItem("highScoreLevel", JSON.stringify(highScoreLevel));
+  }, [highScore]);
 
   function handleDiceNumChange(event) {
     setNumberOfDice(() => Number(event.target.value));
@@ -116,7 +123,7 @@ export default function App() {
       <div className="dice-container">{diceElements}</div>
       <p className="score">Score: {rolls}</p>
       <p className="score">
-        {highScore != 100000000000000000000000000000000000
+        {highScore != 1000000000
           ? `High Score: ${highScore} (Level: ${highScoreLevel})`
           : ``}
       </p>
