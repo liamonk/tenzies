@@ -10,6 +10,7 @@ export default function App() {
   const [dice, setDiceNumbers] = React.useState(allNewDice);
   const [tenzies, setTenzies] = React.useState(false);
   const [rolls, setRolls] = React.useState(0);
+  const [highScore, setHighScore] = React.useState(0);
 
   React.useEffect(() => {
     let allHeld = dice.every((die) => die.isHeld);
@@ -50,6 +51,7 @@ export default function App() {
 
   function newGame() {
     setDiceNumbers(allNewDice());
+    setHighScore(rolls);
     setRolls(0);
     setTenzies(false);
   }
@@ -104,6 +106,7 @@ export default function App() {
       </div>
       <div className="dice-container">{diceElements}</div>
       <p className="score">Score: {rolls}</p>
+      <p className="score">High Score: {highScore}</p>
       <button className="roll-button" onClick={rollDice}>
         Roll!
       </button>
