@@ -6,11 +6,13 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import Confetti from "react-confetti";
 
 export default function App() {
-  const [numberOfDice, setNumberOfDice] = React.useState(15);
+  const [numberOfDice, setNumberOfDice] = React.useState(2);
   const [dice, setDiceNumbers] = React.useState(allNewDice);
   const [tenzies, setTenzies] = React.useState(false);
   const [rolls, setRolls] = React.useState(0);
-  const [highScore, setHighScore] = React.useState(0);
+  const [highScore, setHighScore] =
+    React.useState(100000000000000000000000000000000000);
+  const [highScoreLevel, setHighScoreLevel] = React.useState(0);
 
   React.useEffect(() => {
     let allHeld = dice.every((die) => die.isHeld);
@@ -49,9 +51,16 @@ export default function App() {
     return newDice;
   }
 
+  function highScoreHandler() {
+    if (rolls < highScore && tenzies) {
+      setHighScore(rolls);
+      setHighScoreLevel(numberOfDice);
+    }
+  }
+
   function newGame() {
+    highScoreHandler();
     setDiceNumbers(allNewDice());
-    setHighScore(rolls);
     setRolls(0);
     setTenzies(false);
   }
@@ -106,7 +115,11 @@ export default function App() {
       </div>
       <div className="dice-container">{diceElements}</div>
       <p className="score">Score: {rolls}</p>
-      <p className="score">High Score: {highScore}</p>
+      <p className="score">
+        {highScore != 100000000000000000000000000000000000
+          ? `High Score: ${highScore} (Level: ${highScoreLevel})`
+          : ``}
+      </p>
       <button className="roll-button" onClick={rollDice}>
         Roll!
       </button>
