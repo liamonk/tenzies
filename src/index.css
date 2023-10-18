@@ -25,6 +25,7 @@ main {
 }
 
 .dice-container {
+    margin-top: 20px;
     display: grid;
     grid-template: auto auto / repeat(5, 1fr);
     gap: 75px;
@@ -49,6 +50,8 @@ main {
 .instructions{
     text-align: center;
     margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto
 }
 
 .roll-button{
@@ -84,4 +87,12 @@ main {
     margin-top: 5px;
     margin-bottom: 10px;
     width: 50px
+}
+
+@media only screen and (max-width: 600px) {
+    .dice-container {
+        display: grid;
+        grid-template: auto auto / repeat(3, 1fr);
+        gap: 75px;
+    }
 }

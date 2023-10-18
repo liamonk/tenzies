@@ -96,7 +96,7 @@ export default function App() {
         {tenzies ? (
           <p>Congratulations - You Won in {rolls} turns!</p>
         ) : (
-          <p>
+          <p className="instructions">
             Roll the dice until they are all the same. Click on a dice to hold
             it.
           </p>
