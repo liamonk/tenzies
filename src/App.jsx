@@ -1,6 +1,9 @@
 import React from "react";
 import Dice from "./components/Dice";
 import { nanoid } from "nanoid";
+import { useWindowSize } from "@uidotdev/usehooks";
+
+import Confetti from "react-confetti";
 
 export default function App() {
   const [numberOfDice, setNumberOfDice] = React.useState(10);
@@ -73,8 +76,11 @@ export default function App() {
     );
   });
 
+  const { width, height } = useWindowSize();
+
   return (
     <main>
+      {tenzies ? <Confetti width={width} height={height}></Confetti> : <></>}
       <h1>N-zies!</h1>
       <p className="instuctions">Select the number of dice to play with!</p>
       <input
