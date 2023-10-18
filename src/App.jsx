@@ -6,7 +6,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import Confetti from "react-confetti";
 
 export default function App() {
-  const [numberOfDice, setNumberOfDice] = React.useState(10);
+  const [numberOfDice, setNumberOfDice] = React.useState(15);
   const [dice, setDiceNumbers] = React.useState(allNewDice);
   const [tenzies, setTenzies] = React.useState(false);
   const [rolls, setRolls] = React.useState(0);
