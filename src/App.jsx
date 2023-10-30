@@ -98,7 +98,7 @@ export default function App() {
 
   return (
     <main>
-      {tenzies ? <Confetti width={width} height={height}></Confetti> : <></>}
+      {tenzies && <Confetti width={width} height={height}></Confetti>}
       <h1>N-zies!</h1>
       <p className="instuctions">Select the number of dice to play with!</p>
       <input
