@@ -3,8 +3,10 @@ import Dice from "./components/Dice";
 import { nanoid } from "nanoid";
 import { useWindowSize } from "@uidotdev/usehooks";
 import Confetti from "react-confetti";
+import DarkModeToggle from "./components/DarkModeToggle";
 
 export default function App() {
+  const [darkMode, setDarkMode] = React.useState(false);
   const [numberOfDice, setNumberOfDice] = React.useState(10);
   const [dice, setDiceNumbers] = React.useState(allNewDice);
   const [tenzies, setTenzies] = React.useState(false);
@@ -98,8 +100,10 @@ export default function App() {
 
   return (
     <main>
+      <DarkModeToggle></DarkModeToggle>
       {tenzies && <Confetti width={width} height={height}></Confetti>}
       <h1>N-zies!</h1>
+
       <p className="instuctions">Select the number of dice to play with!</p>
       <input
         type="number"

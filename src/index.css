@@ -100,3 +100,66 @@ main {
 
 
 }
+
+/* dark mode slider css */
+
+.darkModeButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+}
+
+.darkModeButton span{
+    font-size: 10px;
+}
+
+.toggleTheme{
+    position: relative;
+    display: inline-block;
+    height: 20px;
+    width: 48px
+}
+
+.toggleTheme input{
+    display: none
+}
+
+.slider {
+    background-color: #ccc;
+    position: absolute;
+    cursor: pointer;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    transition: 0.2s;
+  }
+  
+  .slider:before {
+    background-color: #fff;
+    bottom: 1px;
+    content: "";
+    height: 18px;
+    left: 1px;
+    position: absolute;
+    transition: 0.4s;
+    width: 20px;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  input:checked + .slider {
+    background-color: cornflowerblue;
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
